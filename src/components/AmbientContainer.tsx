@@ -1,18 +1,28 @@
 import { useEffect, useRef } from "react";
 
-const AmbientContainer = () => {
+type AmbientContainerProps = {
+  ambient: boolean;
+};
+
+const AmbientContainer = ({ ambient }: AmbientContainerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  console.log(ambient);
+
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const video = videoRef.current;
-    if (!video) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    drawAmbient(ctx, canvas, video);
-  }, []);
+    if (ambient === true) {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const video = videoRef.current;
+      if (!video) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      drawAmbient(ctx, canvas, video);
+    } else {
+      null;
+    }
+  }, [ambient]);
 
   const drawAmbient = (
     ctx: CanvasRenderingContext2D,
