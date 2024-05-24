@@ -39,7 +39,7 @@ const AmbientContainer = ({ ambient }: AmbientContainerProps) => {
       <video
         ref={videoRef}
         controls
-        // autoPlay
+        autoPlay
         muted
         loop
         src="/media/AmbientModeTest.mp4"
