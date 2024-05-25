@@ -7,8 +7,10 @@ function App() {
 
   return (
     <div className="page">
-      <button onClick={() => setAmbient(!ambient)}>Toggle Ambient Mode</button>
-      <AmbientContainer ambient={ambient} />
+      <button onClick={() => setAmbient(!ambient)}>
+        Toggle Ambient Mode {!ambient ? "On" : "Off"}
+      </button>
+      <AmbientContainer ambient={ambient} fileType={} />
       <AmbientContainer ambient={ambient} />
       <AmbientContainer ambient={ambient} />
       <AmbientContainer ambient={ambient} />
