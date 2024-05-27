@@ -12,8 +12,9 @@ type AmbientContainerProps = {
 };
 
 const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
-  const mediaRef = useRef<HTMLVideoElement | HTMLImageElement | null>(null);
-  console.log(typeof fileType);
+  const mediaRef = useRef<
+    HTMLVideoElement | HTMLImageElement | HTMLIFrameElement | null
+  >(null);
 
   // const videoRef = useRef<HTMLIFrameElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -32,7 +33,7 @@ const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
   const drawAmbient = (
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement,
-    media: HTMLVideoElement | HTMLImageElement,
+    media: HTMLVideoElement | HTMLImageElement | HTMLIFrameElement,
     ambient: boolean
   ) => {
     ctx.drawImage(media, 0, 0, 1, 1, 0, 0, canvas.width, canvas.height);
@@ -53,7 +54,6 @@ const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
           className="video"
           ref={mediaRef as React.RefObject<HTMLImageElement>}
           src="/media/AmbientModeImage.jpg"
-          // src="/media/ContrastingImage.jpg"
         ></img>
       )}
       {fileType === FileType.VIDEO && (
@@ -64,21 +64,22 @@ const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
           autoPlay
           muted
           loop
-          src="/media/AmbientModeTriangle.mp4"
+          src="/media/AmbientModeTest.mp4"
         ></video>
       )}
-      {/* <iframe
-        className="video"
-        ref={videoRef}
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/E7zz_BGVvrg?si=hdRtCHe6HyeBqNcW"
-        title="YouTube video player"
-        // frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        // referrerpolicy="strict-origin-when-cross-origin"
-        // allowfullscreen
-      ></iframe> */}
+      {fileType === FileType.IFRAME && (
+        // <iframe
+        //   className="media"
+        //   ref={mediaRef as React.RefObject<HTMLVideoElement>}
+        //   width="560"
+        //   height="315"
+        //   src="https://www.youtube.com/embed/E7zz_BGVvrg?si=hdRtCHe6HyeBqNcW"
+        //   title="YouTube video player"
+        //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        //   allowFullScreen
+        // ></iframe>
+        <div>Nothing to see here.</div>
+      )}
     </div>
   );
 };

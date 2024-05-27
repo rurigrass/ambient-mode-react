@@ -9,7 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 50px;
+  gap: 80px;
 }
 
 .container {
@@ -24,7 +24,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  filter: blur(30px);
+  filter: blur(50px);
+  border-radius: 15px;
 }
 
 .video {

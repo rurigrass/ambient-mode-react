@@ -18,6 +18,7 @@ function App() {
       </button>
       <AmbientContainer ambient={ambient} fileType={FileType.IMAGE} />
       <AmbientContainer ambient={ambient} fileType={FileType.VIDEO} />
+      {/* <AmbientContainer ambient={ambient} fileType={FileType.IFRAME} /> */}
     </div>
   );
 }
