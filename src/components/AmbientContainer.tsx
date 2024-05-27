@@ -1,21 +1,27 @@
 import { useEffect, useRef } from "react";
 
-
+enum FileType {
+  VIDEO = "video",
+  IMAGE = "image",
+  IFRAME = "iframe",
+}
 
 type AmbientContainerProps = {
   ambient: boolean;
-  fileType: 
+  fileType: FileType;
 };
 
-const AmbientContainer = ({ ambient }: AmbientContainerProps) => {
-  const videoRef = useRef<HTMLVideoElement | HTMLImageElement>(null);
+const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
+  const mediaRef = useRef<HTMLVideoElement | HTMLImageElement | null>(null);
+  console.log(typeof fileType);
+
   // const videoRef = useRef<HTMLIFrameElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const media = videoRef.current;
+    const media = mediaRef.current;
     if (!media) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -27,7 +33,6 @@ const AmbientContainer = ({ ambient }: AmbientContainerProps) => {
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement,
     media: HTMLVideoElement | HTMLImageElement,
-    // video: HTMLIFrameElement,
     ambient: boolean
   ) => {
     ctx.drawImage(media, 0, 0, 1, 1, 0, 0, canvas.width, canvas.height);
@@ -42,22 +47,26 @@ const AmbientContainer = ({ ambient }: AmbientContainerProps) => {
   return (
     <div className="container">
       <canvas className="canvas" ref={canvasRef}></canvas>
-      {/* <video
-        className="video"
-        ref={videoRef}
-        controls
-        autoPlay
-        muted
-        loop
-        // src="/media/AmbientModeTest.mp4"
-        src="/media/AmbientModeTriangle.mp4"
-      ></video> */}
-      <img
-        className="video"
-        ref={videoRef}
-        src="/media/AmbientModeImage.jpg"
-        // src="/media/ContrastingImage.jpg"
-      ></img>
+
+      {fileType === FileType.IMAGE && (
+        <img
+          className="video"
+          ref={mediaRef as React.RefObject<HTMLImageElement>}
+          src="/media/AmbientModeImage.jpg"
+          // src="/media/ContrastingImage.jpg"
+        ></img>
+      )}
+      {fileType === FileType.VIDEO && (
+        <video
+          className="video"
+          ref={mediaRef as React.RefObject<HTMLVideoElement>}
+          controls
+          autoPlay
+          muted
+          loop
+          src="/media/AmbientModeTriangle.mp4"
+        ></video>
+      )}
       {/* <iframe
         className="video"
         ref={videoRef}
