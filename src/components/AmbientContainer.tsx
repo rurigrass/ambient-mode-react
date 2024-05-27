@@ -12,9 +12,7 @@ type AmbientContainerProps = {
 };
 
 const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
-  const mediaRef = useRef<
-    HTMLVideoElement | HTMLImageElement | HTMLIFrameElement | null
-  >(null);
+  const mediaRef = useRef<HTMLVideoElement | HTMLImageElement | null>(null);
 
   // const videoRef = useRef<HTMLIFrameElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -33,7 +31,7 @@ const AmbientContainer = ({ ambient, fileType }: AmbientContainerProps) => {
   const drawAmbient = (
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement,
-    media: HTMLVideoElement | HTMLImageElement | HTMLIFrameElement,
+    media: HTMLVideoElement | HTMLImageElement,
     ambient: boolean
   ) => {
     ctx.drawImage(media, 0, 0, 1, 1, 0, 0, canvas.width, canvas.height);
